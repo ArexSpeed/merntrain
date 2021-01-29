@@ -17,11 +17,24 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
 })
 
+//Connect to votes from db
+fetch('http://localhost:5000/poll')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    let votes = data.votes;
+    let totalVotes = votes.length
+    //Count vote points - acc/current value
+    voteCounts = votes.reduce((acc, vote) => (
+      (acc[vote.os] = (acc[vote.os] || 0) + parseInt(vote.points)), acc),
+      {}
+  );
+
 let dataPoints = [
-  {label: 'Windows', y: 0},
-  {label: 'MacOS', y: 0},
-  {label: 'Linux', y: 0},
-  {label: 'Other', y: 0},
+  {label: 'Windows', y: voteCounts.Windows},
+  {label: 'MacOS', y: voteCounts.MacOS},
+  {label: 'Linux', y: voteCounts.Linux},
+  {label: 'Other', y: voteCounts.Other},
 ]
 
 const chartContainer = document.querySelector('#chartContainer')
@@ -32,7 +45,7 @@ if(chartContainer){
     animationEnabled: true,
     theme: 'theme1',
     title: {
-      text: 'OS Results'
+      text: `Total Votes : ${totalVotes}`
     },
     data: [
       {
@@ -52,15 +65,19 @@ if(chartContainer){
 
   var channel = pusher.subscribe('os-poll');
   channel.bind('os-vote', function(data) {
-    dataPoints = dataPoints.map(x => {
-      if(x.label == data.os){
-        x.y += data.points;
-        return x;
-      }else{
-        return x;
-      }
-    })
+    dataPoints.forEach((point)=>{
+        if(point.label==data.os)
+        {
+             point.y+=data.points;
+             totalVotes+=data.points;
+             event = new CustomEvent('votesAdded',{detail:{totalVotes:totalVotes}});
+             // Dispatch the event.
+             document.dispatchEvent(event);
+        }
+    });
     chart.render()
   });
 
 }
+
+})
