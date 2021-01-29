@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import poll from './routes/poll.js'
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 //Enable Cors
 app.use(cors());
+
+app.use('/poll', poll);
 
 const PORT = 5000;
 
