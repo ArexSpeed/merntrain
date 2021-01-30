@@ -2,12 +2,15 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import morgan from 'morgan';
+import transactions from './routes/transactions.js'
 
 dotenv.config()
 
+
+
 const app = express();
 
-app.get('/', (req,res) => res.send("Hello"))
+app.use('/api/transactions', transactions)
 
 const PORT = process.env.PORT || 5000;
 
