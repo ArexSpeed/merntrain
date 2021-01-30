@@ -12,6 +12,8 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/api/transactions', transactions)
 
 const PORT = process.env.PORT || 5000;
