@@ -1,7 +1,14 @@
 import express from 'express';
-import {getTransactions} from '../controllers/transactionController.js'
+import {getTransactions, addTransaction, deleteTransaction} from '../controllers/transactionController.js'
 const router = express.Router();
 
-router.get('/', (req,res) => res.send("Hello"))
+router
+  .route('/')
+  .get(getTransactions)
+  .post(addTransaction);
+
+router
+  .route('/:id')
+  .delete(deleteTransaction);
 
 export default router;

@@ -3,8 +3,10 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import morgan from 'morgan';
 import transactions from './routes/transactions.js'
+import connectDB from './db.js'
 
 dotenv.config()
+connectDB();
 
 
 
