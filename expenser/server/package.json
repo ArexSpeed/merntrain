@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "backend for expenser",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "author": "AC",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.14",
+    "morgan": "^1.10.0"
+  }
+}
