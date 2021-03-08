@@ -2,14 +2,14 @@ import {useState, useEffect} from 'react'
 import {firebase} from '../firebase'
 import moment from 'moment'
 import {collatedTasksExist} from '../helpers'
+import db from '../firebase'
 
 export const useTasks = selectedProject => {
   const [tasks, setTasks] = useState([])
   const [archivedTasks, setArchivedTasks] = useState([])
   
   useEffect(() => {
-    let unsubscribe = firebase
-    .firestore()
+    let unsubscribe = db
     .collection('tasks')
     .where('userId', '==', "y8jdhu98edjh8s2d");
 
@@ -54,7 +54,7 @@ export const useProjects = () => {
   const [projects, setProjects] = useState(null)
 
   useEffect(() => {
-    firebase.firestore()
+    db
     .collection('projects')
     .where('userId', '==', 'y8jdhu98edjh8s2')
     .orderBy('projectId')
