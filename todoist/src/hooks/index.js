@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react'
-import {firebase} from '../firebase'
 import moment from 'moment'
 import {collatedTasksExist} from '../helpers'
 import db from '../firebase'
@@ -51,25 +50,27 @@ export const useTasks = selectedProject => {
 }
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState(null)
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    db
-    .collection('projects')
-    .where('userId', '==', 'y8jdhu98edjh8s2')
-    .orderBy('projectId')
-    .get()
-    .then(snapshot => {
-      const allProjects = snapshot.docs.map(project => ({
-        ...project.data(),
-        docId: project.id
-      }))
+      db
+      .collection('projects')
+      .where('userId', '==', 'y8jdhu98edjh8s2d')
+      .orderBy('projectId')
+      .get()
+      .then(snapshot => {
 
-      if(JSON.stringify(allProjects) !== JSON.stringify(projects)){
-        setProjects(allProjects)
-      }
-    })
-  }, [projects])
+        const allProjects = snapshot.docs.map(project => ({
+          ...project.data(),
+          docId: project.id,
+        }));
 
-  return {projects, setProjects}
-}
+        if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
+          setProjects(allProjects);
+          
+        }
+      });
+  }, [projects]);
+
+  return { projects, setProjects };
+};
