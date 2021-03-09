@@ -1,9 +1,8 @@
-import {firebase} from '../firebase'
+import db from '../firebase'
 
 export const Checkbox = ({id}) => {
   const archiveTask = () => {
-    firebase
-      .firestore()
+      db
       .collection('tasks')
       .doc(id)
       .update({
