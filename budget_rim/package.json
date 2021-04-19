@@ -21,6 +21,7 @@
     "redux": "^4.0.5",
     "redux-devtools": "^3.7.0",
     "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
     "styled-normalize": "^8.0.7",
     "web-vitals": "^1.1.1"
@@ -30,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:db": "json-server --watch db.json"
+    "start:db": "json-server --watch db.json --port 3001"
   },
   "eslintConfig": {
     "extends": [
