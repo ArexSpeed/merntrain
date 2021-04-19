@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Navigation, Wrapper } from 'components';
+import { LoadingIndicator, Navigation, Wrapper, Button } from 'components';
 import GlobalStyles from './globalcss';
 import theme from 'utils/theme';
 
@@ -14,7 +14,6 @@ function App() {
   const { i18n } = useTranslation();
   return (
     <>
-    <ThemeProvider theme={theme}>
       <GlobalStyles />
 
       <Router>
@@ -25,8 +24,8 @@ function App() {
           ]}
           RightElement={(
             <div>
-              <button onClick={() => i18n.changeLanguage('pl')}>pl</button>
-              <button onClick={() => i18n.changeLanguage('en')}>en</button>
+              <Button variant="regular" onClick={() => i18n.changeLanguage('pl')}>pl</Button>
+              <Button variant="regular" onClick={() => i18n.changeLanguage('en')}>en</Button>
             </div>
           )}
         />
@@ -42,16 +41,17 @@ function App() {
           </Switch>
         </Wrapper>
       </Router>
-      </ThemeProvider>
     </>
   );
 }
 
 function RootApp() {
   return (
-    <Suspense fallback="Loading...">
+    <ThemeProvider theme={theme}>
+    <Suspense fallback={<LoadingIndicator />}>
       <App />
     </Suspense>
+    </ThemeProvider>
   )
 }
 
