@@ -6,3 +6,23 @@ redux toolkit
 - useGetCryptosQuery with number count (how many item to get) adding by 
 query: (count) => createRequest(`/coins?limit=${count}`)
 
+Get window size and react for that except media query in css
+
+``` javascript
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  useEffect(() => {
+    if(screenSize < 768) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
+    }
+  }, [screenSize]);
+  ```
