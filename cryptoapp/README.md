@@ -26,3 +26,7 @@ Get window size and react for that except media query in css
     }
   }, [screenSize]);
   ```
+
+- make nice parse effect (just write code to object in html)
+import HTMLReactParser from 'html-react-parser';
+{HTMLReactParser(exchange.description || '')}
