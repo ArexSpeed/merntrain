@@ -1,4 +1,4 @@
-import "./cts.css";
+import "./cta.css";
 
 const CTA = () => {
   return (
