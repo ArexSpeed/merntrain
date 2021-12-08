@@ -38,10 +38,12 @@ const Hero = () => {
           <ModalComponent 
             text="Signup"
             variant="primary"
+            isSingupFlow={true}
           />
           <ModalComponent 
             text="Login"
             variant="secondary"
+            isSingupFlow={false}
           />
         </HeaderContainer>
       </Container>
