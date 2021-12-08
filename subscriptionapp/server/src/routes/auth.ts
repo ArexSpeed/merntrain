@@ -3,6 +3,7 @@ import { body, validationResult } from 'express-validator';
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { checkAuth } from "../middleware/checkAuth";
 
 const router = express.Router();
 
@@ -105,6 +106,21 @@ router.post("/login", async (req, res) => {
     errors: [],
     data: {
       token,
+      user: {
+        id: user._id,
+        email: user.email
+      }
+    }
+  })
+});
+
+router.get('/me', checkAuth, async (req, res) => {
+  //res.send(req.user);
+  const user = await User.findOne({ email: req.user });
+
+  return res.json({
+    errors: [],
+    data: {
       user: {
         id: user._id,
         email: user.email
