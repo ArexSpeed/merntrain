@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/user";
+import Article from "../models/article";
 import { checkAuth } from "../middleware/checkAuth";
 import { stripe } from "../utils/stripe";
 
@@ -15,6 +16,14 @@ router.get("/prices", checkAuth, async (req, res) => {
 
 router.post("/session", checkAuth, async (req, res) => {
   const user = await User.findOne({ email: req.user });
+
+  Article.create({
+    title: "Life in a busy city",
+    imageUrl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia neque excepturi molestiae nam quidem eaque ab molestias quos quasi, mollitia, ullam vitae. Veniam dicta ullam voluptas eveniet quaerat, similique enim.",
+    access: "Premium"
+  });
+
   const session = await stripe.checkout.sessions.create(
     {
       mode: "subscription",
