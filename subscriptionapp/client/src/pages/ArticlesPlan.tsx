@@ -47,6 +47,16 @@ const ArticlesPlan = () => {
     setPrices(response.data);
   }
 
+  const createSession = async (priceId: string) => {
+    const { data: response } = await axios.post("http://localhost:5000/subs/session", 
+      {
+        priceId
+      }
+    );
+
+    window.location.href = response.url;
+  }
+
   const backgroundColors: any = {
     Basic: "rgb(104,219,104)",
     Standard: "rgba(187, 42, 23, 0.835)",
@@ -56,8 +66,8 @@ const ArticlesPlan = () => {
   return (
     <Container>
       <CardsContainer>
-        {prices.map((price: any) => (
-          <Card style={{ width: "18rem", height: "25rem", marginRight: "2rem" }}>
+        {prices.map((price: any, i) => (
+          <Card key={i} style={{ width: "18rem", height: "25rem", marginRight: "2rem" }}>
             <CardHeader style={{ backgroundColor: backgroundColors[price.nickname]}}>
               <PriceCircle>
                 <PriceText>
@@ -69,7 +79,13 @@ const ArticlesPlan = () => {
               <Card.Title style={{ fontSize: "2rem" }}>
                 {price.nickname}
               </Card.Title>
-              <Button variant="primary" className="mt-4">Buy now</Button>
+              <Button 
+                variant="primary" 
+                className="mt-4"
+                onClick={() => createSession(price.id)}
+              >
+                Buy now
+              </Button>
             </Card.Body>
           </Card>
         ))}

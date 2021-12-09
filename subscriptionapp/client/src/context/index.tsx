@@ -4,7 +4,8 @@ import axios from 'axios';
 interface User {
   data: {
     id: string,
-    email: string
+    email: string,
+    customerStripeId: string,
   } | null,
   error: string | null,
   loading: boolean
@@ -38,7 +39,8 @@ const UserProvider = ({ children }: any) => {
       setUser({
         data: {
           id: response.data.user.id,
-          email: response.data.user.email
+          email: response.data.user.email,
+          customerStripeId: response.data.user.customerStripeId
         },
         loading: false,
         error: null
@@ -47,7 +49,8 @@ const UserProvider = ({ children }: any) => {
       setUser({
         data: {
           id: response.data.user.id,
-          email: response.data.user.email
+          email: response.data.user.email,
+          customerStripeId: response.data.user.customerStripeId
         },
         loading: false,
         error: response.errors[0].msg
