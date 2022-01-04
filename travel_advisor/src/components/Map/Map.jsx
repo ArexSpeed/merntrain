@@ -1,11 +1,11 @@
 import GoogleMapReact from 'google-map-react';
 import { Paper, Typography, useMediaQuery } from '@mui/material';
 import { LocationOnOutlined } from '@mui/icons-material';
-import Rating from '@mui/lab';
+import { Rating } from '@mui/lab';
 
 import useStyles from './styles';
 
-const Map = ({ setCoordinates, setBounds, coordinates}) => {
+const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(min-width: 600px)');
 
@@ -24,7 +24,30 @@ const Map = ({ setCoordinates, setBounds, coordinates}) => {
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
       >
-
+        {places?.map((place, i) => (
+          <div 
+            className={classes.markerContainer}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
+            key={i}
+          >
+            {
+              isMobile ? (
+                <LocationOnOutlined color="primary" fontSize="large" />
+              ) : (
+                <Paper elevation={3} className={classes.paper}>
+                  <Typography className={classes.typography} variant="subtitle2" gutterBottom> {place.name}</Typography>
+                  <img
+                    className={classes.pointer}
+                    src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
+                    alt=""
+                  />
+                  <Rating name="read-only" size="small" value={Number(place.rating)} readOnly />
+                </Paper>
+              )
+            }
+          </div>
+        ))}
       </GoogleMapReact>
     </div>
   )
