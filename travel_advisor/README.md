@@ -5,3 +5,6 @@ Billing Account is necessary
 
 Api:
 Get api from RapidApi -> TravelAdvisorAPI
+
+To search places
+Go to Google Console and add Places API
