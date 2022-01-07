@@ -8,3 +8,7 @@ Get api from RapidApi -> TravelAdvisorAPI
 
 To search places
 Go to Google Console and add Places API
+
+Open Weather API from rapidApi
+
+map styles get from snazzymaps.com

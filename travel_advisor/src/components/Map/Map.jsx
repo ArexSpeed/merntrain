@@ -4,6 +4,7 @@ import { LocationOnOutlined } from '@mui/icons-material';
 import { Rating } from '@mui/lab';
 
 import useStyles from './styles';
+import mapStyles from './mapStyles';
 
 const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, weatherData }) => {
   const classes = useStyles();
@@ -17,7 +18,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
         center={coordinates}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={''}
+        options={{ disabledDefaultUI: true, zoomControl: true, styles: mapStyles }}
         onChange={(e) => {
           console.log(e);
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
