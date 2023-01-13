@@ -16,7 +16,7 @@ const Topbar = () => {
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      {/* SearchBox */}
+      {/* SEARCH BAR */}
       <Box
         display="flex"
         backgroundColor={colors.primary[400]}
@@ -27,7 +27,8 @@ const Topbar = () => {
           <SearchIcon />
         </IconButton>
       </Box>
-      {/* Icons */}
+
+      {/* ICONS */}
       <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
@@ -46,8 +47,6 @@ const Topbar = () => {
           <PersonOutlinedIcon />
         </IconButton>
       </Box>
-
-      <IconButton sx={{ display: "flex " }}></IconButton>
     </Box>
   );
 };
